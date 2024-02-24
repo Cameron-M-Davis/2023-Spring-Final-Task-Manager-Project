@@ -1,0 +1,105 @@
+citate: this documentation we written on Mermaid Live Editor and the UML created with this documentation is created by the fine folks at that website for creating a UML documentation to UML image tool. Thank you Mermaid Live Editor
+
+
+ClassDiagram
+Task --> BaseTask
+BaseTask --> CheckBoxTask
+BaseTask --> ProgressBarTask
+
+
+    class TaskManager{
+        + Scanner inScanner;
+        + String inText;
+        + ArrayList<User> userList;
+        + ArrayList<Project> projectList;
+        + User presentUser;
+
+        + void Main();
+        + TaskManager();
+        + void userMenu();
+        + void projectUserView();
+        + void taskUserView();
+        + void adminMenu();
+        + void editUsers();
+        + void newUser();
+        + void editProjects();
+        + void logOut();
+        + boolean login();
+        + void saveUsers();
+        + void loadUsers();
+        + void saveProjects();
+        + void loadProjects();
+        + void createDefaultUsers();
+        + void createDefaultProjects();
+    }
+
+    class Project{
+        + String name;
+        + ArrayList<String> Users;
+        + ArrayList<BaseTask> Tasks;
+
+        + Project(String projectName);
+        + void addTask();
+    }
+
+    class User{
+        * ArrayList<String> userIDs;
+        + String userID;
+        + String password;
+        + String name;
+        + String role;
+
+        + User(String userID, String password, String role);
+        + void setUserID(String id);
+        + String validateUserID(String id);
+        + void getUserDetails();
+        + void readArray();
+    }
+    class Task{
+        "INTERFACE"
+        + void getTaskDetails();
+        + void getTaskState();
+        + boolean getMenu();
+        + void setTaskID(int id);
+        + int validateTaskID(int id);
+    }
+    class BaseTask{
+        "Implements Task, Serializable"
+        * ArrayList<Integer> taskIDs;
+        + ArrayList<String> users;
+        + ArrayList<String> notes;
+        + int taskID;
+        + String taskTitle
+        + String startDate;
+        + String endDate;
+
+        + BaseTask();
+        + BaseTask(String title, String startDate, String endDate);
+        + void getTaskDetails();
+        + void getTaskState();
+        + boolean getMenu();
+        + void getNotes();
+        + void addNote();
+        + void setTaskID();
+        + int validateTaskID();
+    }
+    class CheckBoxTask{
+        "Extends BaseTask"
+        + ArrayList<Integer> checkBoxes;
+        + ArrayList<String> cbNames;
+        + String unChecked;
+        + String checked;
+
+        + CheckListTask(String title, String startDate, String endDate);
+        + boolean getMenu();
+    }
+    class ProgressBarTask{
+        "Extends BaseTask"
+        + ArrayList<Integer> precentages;
+        + ArrayList<String> itemNames;
+        + int barLength;
+
+        + ProgressBarTask(String title, String startDate, String endDate);
+        + boolean getMenu();        
+    }
+

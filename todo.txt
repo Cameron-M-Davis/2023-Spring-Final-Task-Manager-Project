@@ -1,0 +1,13 @@
+see the cb's
+check un check the cb's
+add notes
+leave menu
+
+
+need to add in the controls for the check boxes
+
+
+when you select the type of task there's a [0] number, pretty sure its the list of task ID's for some reason
+
+
+

@@ -1,0 +1,169 @@
+import java.util.*;
+import java.io.*;
+
+public class TaskManager{
+	public Scanner inScanner = new Scanner(System.in);
+	public String inText = "";
+
+	protected ArrayList<User> userList = new ArrayList<User>();
+	protected ArrayList<Project> projectList = new ArrayList<Project>();
+	
+	public User presentUser = null;
+
+
+	public static void main(String[] args){
+		boolean keepGoing = true;
+
+		TaskManager gary = new TaskManager(); 
+		// I am going to be entirely honest with you here, I was going to call this manager. Then I thought it was funnier if this line read 'task manager gary' like the
+		// object is just a dude named gary who manages all your tasks for you.
+		// .. sometimes you don't need to write good code. Sometimes you need to write the code that keeps you sane or bolsters your spirit.
+
+		while(keepGoing){
+			if(gary.presentUser == null){
+				keepGoing = gary.login();
+			}
+
+
+
+
+		}// End WHILE LOOP (KEEPGOING)
+	}//End Main
+
+
+
+	TaskManager(){
+		//Whenever we're making a new task manager we're going to want to re-load all the arrays
+		this.loadUsers();
+		this.loadProjects();
+	}//
+	//End Constructors
+	
+
+	public boolean login(){
+		boolean keepGoing = true;
+		boolean matchFound = false;
+		User loginUser = null;
+		System.out.println("Welcome to the task management system:");
+		System.out.println("=========================================");
+		System.out.println("[1] - Login ");
+		System.out.println("[0] - Quit  ");
+		inText = inScanner.nextLine();
+		//
+		System.out.println("\n//-//-//\n ");
+
+		if(inText.equals("1")){//LOGIN
+			System.out.println("Please Enter Your User ID: ");
+			inText = inScanner.nextLine();
+			
+
+			for(int i = 0; i < this.userList.size(); i++){
+				if(inText.equals(userList.get(i).userID)){
+					matchFound = true;
+				}
+			}
+
+			if(matchFound){	
+				System.out.println("Pleas enter your password");
+				inText = inScanner.nextLine();
+				if(inText.equals(loginUser.password)){
+					System.out.println("Login Accepted");
+					presentUser = loginUser;
+
+				}
+				else{
+					System.out.println("Sorry that was incorrect");
+				}
+
+			}
+			else{ // NO MATCH WAS FOUND
+				System.out.println("\nNo user could be found with that ID please contact your system administration if the error continues");
+			}
+		}//	End of LOGIN
+		else if(inText.equals("0")){//QUIT
+			System.out.println("Quitting application!");
+			keepGoing = false;
+		}//
+		else{//ELSE
+			System.out.println("Please only enter the number with the listed option you wish to select");
+
+		}//
+		//END OF IF STATEMENT
+
+
+
+		return keepGoing;
+	}
+
+
+
+
+	//OBJECT SAVING AND LOADING
+
+	// USERS
+	public void saveUsers(){
+		try{
+			FileOutputStream fw = new FileOutputStream("users.dat");
+			ObjectOutputStream ow = new ObjectOutputStream(fw);
+			ow.writeObject(userList);
+		}
+		catch(Exception e){
+		System.out.println("Error: "+e.getMessage());
+		}//End TRY CATCH
+	}//End Save
+
+	public void loadUsers(){
+		try{
+			FileInputStream fr = new FileInputStream("users.dat");
+			ObjectInputStream or = new ObjectInputStream(fr);
+			//userList = (ArrayList<User>)or.readObject();
+			userList.add((User)or.readObject());
+		}
+		catch(Exception e){
+		System.out.println("Error: "+e.getMessage());
+		}//End TRY CATCH
+
+	}//End Load
+	//
+
+
+	// PROJECTS
+	public void saveProjects(){
+		try{
+			FileOutputStream fw = new FileOutputStream("projects.dat");
+			ObjectOutputStream ow = new ObjectOutputStream(fw);
+			ow.writeObject(projectList);
+		}
+		catch(Exception e){
+		System.out.println("Error: "+e.getMessage());
+		}//End TRY CATCH
+	}//End Save
+
+	public void loadProjects(){
+		try{
+			FileInputStream fr = new FileInputStream("projects.dat");
+			ObjectInputStream or = new ObjectInputStream(fr);
+			//projectList = (ArrayList<Project>)or.readObject();
+			projectList.add((Project)or.readObject());
+		}
+		catch(Exception e){
+		System.out.println("Error: "+e.getMessage());
+		}//End TRY CATCH
+
+	}//End Load
+
+	//END OBJECT SAVING AND LOADING
+
+
+
+
+
+
+
+
+
+
+
+
+
+}//End Class
